@@ -44,7 +44,7 @@ const formatedResponse = (value) => {
 <template>
     <OverlayLoader :loadingValue="isLoading" />
     <div class="flex flex-col justify-center items-center px-12 py-7">
-        <h2 class="text-3xl text-gray-500">Sample Medical Assistant</h2>
+        <h2 class="text-3xl text-gray-500">Sample Medical Assistant For Test</h2>
         <p class="text-gray-500">Built with Python Flask, Vue 3, LLM model using Huggingface API, MongoDB database, Vector Database </p>
     </div>
 
