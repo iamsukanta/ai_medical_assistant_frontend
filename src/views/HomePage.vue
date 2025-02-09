@@ -63,7 +63,7 @@ const formatedResponse = (value) => {
             <textarea placeholder="Ask your query ..." v-model="query" class="border px-3 py-3 w-full md:w-[550px] lg:w-[600px] max-w-[800px]" rows="5" />
         </div>
         <div>
-            <button class="px-10 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-400 w-full md:w-auto" type="button">
+            <button class="px-10 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-400 w-full md:w-auto" type="button" @click="askAssistant()">
                 Search
             </button>
         </div>
