@@ -1,20 +1,25 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import OverlayLoader from "../components/common/OverlayLoader.vue";
 const query = ref("");
 const response = ref("");
+let isLoading = ref(false);
 
 const askAssistant = async() => {
   if (!query.value) return;
     try {
+      isLoading.value = true;
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/search`, { query: query.value });
       if(res.data?.matches?.query) {
         response.value = res.data?.matches?.response[0]?.generated_text;
       } else {
         response.value = res.data?.response[0]?.generated_text;
       }
+      isLoading.value = false;
     } catch (error) {
       console.error("Error:", error);
+      isLoading.value = false;
     }
 }
 
@@ -37,8 +42,9 @@ const formatedResponse = (value) => {
 </script>
 
 <template>
+    <OverlayLoader :loadingValue="isLoading" />
     <div class="flex flex-col justify-center items-center px-12 py-7">
-        <h2 class="text-3xl text-gray-500">Sample Medical Assistant</h2>
+        <h2 class="text-3xl text-gray-500">Sample Medical Assistant For Test 11111 Why it is not updated</h2>
         <p class="text-gray-500">Built with Python Flask, Vue 3, LLM model using Huggingface API, MongoDB database, Vector Database </p>
     </div>
 
@@ -57,7 +63,7 @@ const formatedResponse = (value) => {
             <textarea placeholder="Ask your query ..." v-model="query" class="border px-3 py-3 w-full md:w-[550px] lg:w-[600px] max-w-[800px]" rows="5" />
         </div>
         <div>
-            <button class="px-10 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-400 w-full md:w-auto" type="button">
+            <button class="px-10 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-400 w-full md:w-auto" type="button" @click="askAssistant()">
                 Search
             </button>
         </div>
